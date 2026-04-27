@@ -35,5 +35,5 @@ jobs:
       - name: Deploy with Docker Compose
         run: |
           cd /home/raoua/devops-script/frontend
-          sudo docker compose pull frontend-app
-          sudo docker compose up -d frontend-app --force-recreate
+           docker compose pull frontend-app
+           docker compose up -d frontend-app --force-recreate
