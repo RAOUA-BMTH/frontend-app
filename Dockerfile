@@ -4,9 +4,9 @@ FROM  --platform=linux/amd64 node:18 AS build
 # Set working directory
 WORKDIR /app
 
-# # Set environment variable
-# ARG VITE_API_URL
-# ENV VITE_API_URL=${VITE_API_URL}
+# Set environment variable
+ARG VITE_API_URL 
+ENV VITE_API_URL=${VITE_API_URL}
 
 # Copy package.json and package-lock.json
 COPY package*.json ./

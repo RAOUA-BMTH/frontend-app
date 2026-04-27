@@ -35,6 +35,7 @@ export const useProductStore = create((set) => ({
       const res = await fetch(`${apiUrl}/api/products`);
       const data = await res.json();
       set({ products: data.data || [] });
+      console.log(data.data)
     } catch (error) {
       console.error("Error fetching products:", error);
     }
