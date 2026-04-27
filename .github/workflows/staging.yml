@@ -24,10 +24,11 @@ jobs:
         run: |
           docker build \
             --build-arg VITE_API_URL=${{ vars.VITE_API_URL }} \
-            -t raouamth/frontend-session16:latest .
+            -t raouamth/frontend-session16:${{ github.sha }} .
 
       - name: Push Docker image
-        run: docker push raouamth/frontend-session16:latest
+        run: |
+          docker push raouamth/frontend-session16:${{ github.sha }}
 
 
   deploy:
@@ -36,11 +37,12 @@ jobs:
     runs-on: [self-hosted, devops]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        
-      - name: Pull latest images
-        run: docker compose -f docker-compose.prod.yml pull
-
       - name: Deploy with Docker Compose
-        run: docker compose -f docker-compose.prod.yml up -d
+        run: |
+          cd /home/raoua/devops-script/frontend
+
+          # pass the image tag dynamically
+          export IMAGE_TAG=${{ github.sha }}
+
+          docker compose pull
+          docker compose up -d --force-recreate
