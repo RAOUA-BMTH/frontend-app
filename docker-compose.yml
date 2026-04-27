@@ -1,16 +1,11 @@
-name: frontend-app-stack
+name: raouamth/frontend-session16
 
-# Define services
 services:
   frontend-app:
-    build:
-      context: .  # Build context is the current directory.
-      dockerfile: Dockerfile  # Specify the Dockerfile to use
-      args:
-        VITE_API_URL: http://localhost:3000  # API URL for the frontend app
-    container_name: frontend-app  # Set a custom name for the container
+    image: raouamth/frontend-session16:latest  
+    container_name: frontend-app
     ports:
-      - '3001:80'  # Map port 3000 on the host to port 80 in the container
+      - '3007:80'
 #     networks:
 #       - frontend-app-networ
 #         # Connect to the defined network

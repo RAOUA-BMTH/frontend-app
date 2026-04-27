@@ -6,8 +6,10 @@ on:
       - main
 
 jobs:
+
   build_and_push:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,15 +27,17 @@ jobs:
         run: docker push raouamth/frontend-session16:latest
 
 
-
   deploy:
     name: Deploy to Server
     needs: build_and_push
     runs-on: [self-hosted, devops]
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Pull latest images
+        run: docker compose -f docker-compose.yml pull
+
       - name: Deploy with Docker Compose
-        run: |
-          cd /home/raoua/devops-script/frontend
-           docker compose pull frontend-app
-           docker compose up -d frontend-app --force-recreate
+        run: docker compose -f docker-compose.yml up -d
