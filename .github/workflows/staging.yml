@@ -24,7 +24,7 @@ jobs:
         run: |
           docker build \
             --build-arg VITE_API_URL=${{ vars.VITE_API_URL }} \
-            -t raouamth/frontend-session16:${{ github.run_number }} .
+            -t raouamth/frontend-session16:version-${{ github.run_number }} .
                     run: |
           docker build \
             --build-arg VITE_API_URL=${{ vars.VITE_API_URL }} \
@@ -32,7 +32,7 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push raouamth/frontend-session16:${{ github.run_number }}
+          docker push raouamth/frontend-session16:version-${{ github.run_number }}
           docker push raouamth/frontend-session16:latest
 
 
