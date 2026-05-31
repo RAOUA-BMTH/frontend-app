@@ -1,8 +1,8 @@
-name: raouamth/frontend-session16
+name: raouamth/frontend-mysql-session16
 
 services:
   frontend-app:
-    image: raouamth/frontend-session16:latest  
+    image: raouamth/frontend-mysql-session16:latest  
     build:
       context: .
       dockerfile: Dockerfile

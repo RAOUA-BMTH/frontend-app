@@ -22,7 +22,7 @@ const HomePage = () => {
 					bgClip={"text"}
 					textAlign={"center"}
 				>
-					Current Products V3
+					Current Products V4
 				</Text>
 
 				<SimpleGrid
@@ -35,7 +35,7 @@ const HomePage = () => {
 					w={"full"}
 				>
 					{products.map((product) => (
-						<ProductCard key={product._id} product={product} />
+						<ProductCard key={product.id} product={product} />
 					))}
 				</SimpleGrid>
 

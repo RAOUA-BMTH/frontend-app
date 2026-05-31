@@ -47,7 +47,7 @@ export const useProductStore = create((set) => ({
       const data = await res.json();
       if (!data.success) return { success: false, message: data.message };
 
-      set((state) => ({ products: state.products.filter((p) => p._id !== pid) }));
+      set((state) => ({ products: state.products.filter((p) => p.id !== pid) }));
       return { success: true, message: data.message };
     } catch (error) {
       return { success: false, message: "Failed to delete product." };
@@ -66,7 +66,7 @@ export const useProductStore = create((set) => ({
       if (!data.success) return { success: false, message: data.message };
 
       set((state) => ({
-        products: state.products.map((p) => (p._id === pid ? data.data : p)),
+        products: state.products.map((p) => (p.id === pid ? data.data : p)),
       }));
 
       return { success: true, message: data.message };
