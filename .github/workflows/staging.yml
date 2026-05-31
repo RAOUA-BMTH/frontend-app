@@ -6,6 +6,7 @@ on:
       - main
 
 jobs:
+
   build_and_push:
     runs-on: ubuntu-latest
 
@@ -19,23 +20,24 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build Docker image (versioned)
+      - name: Build Docker image
         run: |
           docker build \
             --build-arg VITE_API_URL=${{ vars.VITE_API_URL }} \
             -t raouamth/frontend-session16:version-${{ github.run_number }} .
-
-      - name: Build Docker image (latest)
-        run: |
+                    run: |
           docker build \
             --build-arg VITE_API_URL=${{ vars.VITE_API_URL }} \
             -t raouamth/frontend-session16:latest .
 
-      - name: Push Docker images
+      - name: Push Docker image
         run: |
           docker push raouamth/frontend-session16:version-${{ github.run_number }}
           docker push raouamth/frontend-session16:latest
 
+
+          
+          
   deploy:
     name: Deploy to Server
     needs: build_and_push
@@ -45,6 +47,9 @@ jobs:
       - name: Deploy with Docker Compose
         run: |
           cd /home/raoua/devops-script/frontend
-          export IMAGE_TAG=version-${{ github.run_number }}
+
+          # pass the image tag dynamically
+          export IMAGE_TAG=${{ github.run_number }}
+
           docker compose pull
           docker compose up -d --force-recreate
